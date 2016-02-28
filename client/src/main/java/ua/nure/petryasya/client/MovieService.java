@@ -29,20 +29,20 @@ public interface MovieService {
      * @param arg0
      */
     @WebMethod
+    @Action(input = "http://service.petryasya.nure.ua/MovieService/deleteMovieRequest", output = "http://service.petryasya.nure.ua/MovieService/deleteMovieResponse")
+    public void deleteMovie(
+            @WebParam(name = "arg0", partName = "arg0")
+            int arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
     @Action(input = "http://service.petryasya.nure.ua/MovieService/addMovieRequest", output = "http://service.petryasya.nure.ua/MovieService/addMovieResponse")
     public void addMovie(
             @WebParam(name = "arg0", partName = "arg0")
             Movie arg0);
-
-    /**
-     * 
-     * @return
-     *     returns client.ArrayList
-     */
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://service.petryasya.nure.ua/MovieService/getMoviesRequest", output = "http://service.petryasya.nure.ua/MovieService/getMoviesResponse")
-    public ArrayList getMovies();
 
     /**
      * 
@@ -56,5 +56,15 @@ public interface MovieService {
     public Movie getMovie(
             @WebParam(name = "arg0", partName = "arg0")
             int arg0);
+
+    /**
+     * 
+     * @return
+     *     returns client.Movies
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://service.petryasya.nure.ua/MovieService/getMoviesRequest", output = "http://service.petryasya.nure.ua/MovieService/getMoviesResponse")
+    public Movies getMovies();
 
 }

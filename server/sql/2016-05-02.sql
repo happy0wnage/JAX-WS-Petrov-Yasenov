@@ -1,4 +1,4 @@
-CREATE TABLE movie (
+/*CREATE TABLE movie (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(45),
   description TEXT,
@@ -6,4 +6,5 @@ CREATE TABLE movie (
   viewed TINYINT DEFAULT 0
 );
 
-CREATE INDEX movie_id_index ON movie (id);
+CREATE INDEX movie_id_index ON movie (id);*/
+

@@ -11,6 +11,6 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
-        <mapping class="ua.nure.petryasya.model.Movie"></mapping>
+        <mapping class="ua.nure.petryasya.model.Film"></mapping>
     </session-factory>
 </hibernate-configuration>

@@ -144,14 +144,4 @@ public class Movie {
         this.viewed = value;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", year=" + year +
-                ", viewed=" + viewed +
-                '}';
-    }
 }
