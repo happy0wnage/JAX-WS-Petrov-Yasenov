@@ -1,5 +1,5 @@
 
-package ua.nure.petryasya.client;
+package ua.nure.petryasya.core.movie;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,11 +17,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="year" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="viewed" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,32 +34,38 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "name",
     "description",
-    "year",
-    "viewed"
+    "year"
 })
 public class Movie {
 
-    protected int id;
+    protected Integer id;
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
     protected String description;
     protected int year;
-    protected boolean viewed;
 
     /**
      * Gets the value of the id property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * Sets the value of the id property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
      */
-    public void setId(int value) {
+    public void setId(Integer value) {
         this.id = value;
     }
 
@@ -126,22 +131,6 @@ public class Movie {
      */
     public void setYear(int value) {
         this.year = value;
-    }
-
-    /**
-     * Gets the value of the viewed property.
-     * 
-     */
-    public boolean isViewed() {
-        return viewed;
-    }
-
-    /**
-     * Sets the value of the viewed property.
-     * 
-     */
-    public void setViewed(boolean value) {
-        this.viewed = value;
     }
 
 }

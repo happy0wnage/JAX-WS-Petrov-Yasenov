@@ -1,8 +1,9 @@
 package ua.nure.petryasya.web.servlet;
 
-import ua.nure.petryasya.client.MovieService;
-import ua.nure.petryasya.client.MovieServiceImplService;
-import ua.nure.petryasya.client.Movies;
+import ua.nure.petryasya.constants.Constatnts;
+import ua.nure.petryasya.core.movie.MovieService;
+import ua.nure.petryasya.core.movie.MovieServiceImplService;
+import ua.nure.petryasya.core.movie.Movies;
 import ua.nure.petryasya.web.constants.Page;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class HomePageServlet extends HttpServlet {
         MovieService movie = movieService.getMovieServiceImplPort();
 
         Movies movies = movie.getMovies();
-        req.setAttribute("movies", movies);
+        req.setAttribute(Constatnts.ReqParap.MOVIES, movies);
         req.getRequestDispatcher(Page.INDEX).forward(req, resp);
     }
 }

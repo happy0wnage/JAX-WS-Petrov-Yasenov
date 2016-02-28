@@ -1,5 +1,5 @@
 
-package ua.nure.petryasya.client;
+package ua.nure.petryasya.core.movie;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "MovieServiceImplService", targetNamespace = "http://service.petryasya.nure.ua/", wsdlLocation = "http://localhost:9090/movieServer?wsdl")
+@WebServiceClient(name = "MovieServiceImplService", targetNamespace = "http://service.petryasya.nure.ua/", wsdlLocation = "http://localhost:9090/movieService?wsdl")
 public class MovieServiceImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class MovieServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:9090/movieServer?wsdl");
+            url = new URL("http://localhost:9090/movieService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

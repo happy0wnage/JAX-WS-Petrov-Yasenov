@@ -1,5 +1,5 @@
 
-package ua.nure.petryasya.client;
+package ua.nure.petryasya.core.user;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the client package. 
+ * generated in the movie package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,18 +23,10 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: client
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: movie
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Movies }
-     * 
-     */
-    public Movies createMovies() {
-        return new Movies();
     }
 
     /**
@@ -43,6 +35,22 @@ public class ObjectFactory {
      */
     public Movie createMovie() {
         return new Movie();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     * 
+     */
+    public User createUser() {
+        return new User();
+    }
+
+    /**
+     * Create an instance of {@link Users }
+     * 
+     */
+    public Users createUsers() {
+        return new Users();
     }
 
 }

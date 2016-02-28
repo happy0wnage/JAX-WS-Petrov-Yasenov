@@ -29,7 +29,7 @@ public class MySqlConnection {
     public static Connection getWebConnection() {
         try {
             String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://localhost/movie";
+            String url = "jdbc:mysql://localhost/movie_keep";
             String username = "root";
             String password = "1234";
             try {

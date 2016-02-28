@@ -1,20 +1,21 @@
 package ua.nure.petryasya;
 
 import ua.nure.petryasya.dao.MovieDao;
-import ua.nure.petryasya.dao.MovieDaoImpl;
+import ua.nure.petryasya.dao.UserDAO;
+import ua.nure.petryasya.dao.jdbcImpl.MovieDaoJDBCImpl;
+import ua.nure.petryasya.dao.jdbcImpl.UserDAOJDBCImpl;
 import ua.nure.petryasya.exception.DBLayerException;
+import ua.nure.petryasya.model.Movie;
 
 public class Demo1 {
 
     public static void main(String[] args) {
-        MovieDao movieDao = new MovieDaoImpl();
+        MovieDao movieDao = new MovieDaoJDBCImpl();
+        UserDAO userDAO = new UserDAOJDBCImpl();
+        System.out.println(userDAO.getAll());
 
-        System.out.println(movieDao.getAll());
+//        movieDao.get(3);
+        userDAO.addMovie(1,2);
 
-        try {
-            movieDao.delete(2);
-        } catch (DBLayerException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 }

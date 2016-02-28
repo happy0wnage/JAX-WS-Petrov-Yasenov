@@ -1,25 +1,31 @@
-package ua.nure.petryasya.dao;
+package ua.nure.petryasya.dao.jdbcImpl;
 
+import ua.nure.petryasya.constants.DBFields;
+import ua.nure.petryasya.dao.DAO;
+import ua.nure.petryasya.dao.MovieDao;
+import ua.nure.petryasya.dao.MySqlConnection;
 import ua.nure.petryasya.exception.DBLayerException;
-import ua.nure.petryasya.model.Film;
+import ua.nure.petryasya.model.Movie;
+import ua.nure.petryasya.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDaoImpl extends DAO implements MovieDao {
+public class MovieDaoJDBCImpl extends DAO implements MovieDao {
 
-    private static final String GET_FILM_BY_ID = "SELECT * FROM film WHERE id = ?";
-    private static final String GET_FILMS = "SELECT * FROM film";
-    private static final String DELETE_FILM = "DELETE FROM film where id = ?";
-    private static final String INSERT_FILM = "INSERT INTO Film (name,description, year, viewed) values (?,?,?,?) ";
-    private static final String UPDATE_FILM = "UPDATE Film set name = ?, description = ?, year = ?, viewed = ? WHERE id = ?";
+    private static final String GET_FILM_BY_ID = "SELECT * FROM movie WHERE id = ?";
+    private static final String GET_FILMS = "SELECT * FROM movie";
+    private static final String DELETE_FILM = "DELETE FROM movie where id = ?";
+    private static final String INSERT_FILM = "INSERT INTO movie (name,description, year, viewed) values (?,?,?,?) ";
+    private static final String UPDATE_FILM = "UPDATE movie set name = ?, description = ?, year = ?, viewed = ? WHERE id = ?";
+    private static final String GET_MOVIE_USER = "SELECT * FROM movie WHERE id IN (SELECT id_movie FROM movie_user WHERE id_user = ?)";
 
     @Override
-    public List<Film> getAll() {
+    public List<Movie> getAll() {
 
-        List<Film> films = new ArrayList<>();
+        List<Movie> films = new ArrayList<>();
         try {
             con = MySqlConnection.getWebConnection();
             pst = con.prepareStatement(GET_FILMS);
@@ -37,7 +43,27 @@ public class MovieDaoImpl extends DAO implements MovieDao {
     }
 
     @Override
-    public Film get(int id) {
+    public List<Movie> getByUser(int idUser) {
+        List<Movie> movies = new ArrayList<>();
+        try {
+            con = MySqlConnection.getWebConnection();
+            pst = con.prepareStatement(GET_MOVIE_USER);
+            pst.setInt(FIRST, idUser);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                movies.add(extractFilm(rs));
+            }
+            return movies;
+        } catch (SQLException e) {
+            rollBack(con);
+            throw new DBLayerException("Failed to get movies with idUser = " + idUser, e);
+        } finally {
+            commit(con);
+        }
+    }
+
+    @Override
+    public Movie get(int id) {
         try {
             con = MySqlConnection.getWebConnection();
             pst = con.prepareStatement(GET_FILM_BY_ID);
@@ -69,7 +95,7 @@ public class MovieDaoImpl extends DAO implements MovieDao {
     }
 
     @Override
-    public void insert(Film movie) {
+    public void insert(Movie movie) {
         try {
             con = MySqlConnection.getWebConnection();
             int k = 1;
@@ -77,7 +103,6 @@ public class MovieDaoImpl extends DAO implements MovieDao {
             pst.setString(k++, movie.getName());
             pst.setString(k++, movie.getDescription());
             pst.setInt(k++, movie.getYear());
-            pst.setBoolean(k++, movie.isViewed());
             pst.executeUpdate();
         } catch (SQLException e) {
             rollBack(con);
@@ -88,7 +113,7 @@ public class MovieDaoImpl extends DAO implements MovieDao {
     }
 
     @Override
-    public void update(Film movie) {
+    public void update(Movie movie) {
         try {
             con = MySqlConnection.getWebConnection();
             int k = 1;
@@ -96,7 +121,6 @@ public class MovieDaoImpl extends DAO implements MovieDao {
             pst.setString(k++, movie.getName());
             pst.setString(k++, movie.getDescription());
             pst.setInt(k++, movie.getYear());
-            pst.setBoolean(k++, movie.isViewed());
             pst.setInt(k++, movie.getId());
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -107,45 +131,17 @@ public class MovieDaoImpl extends DAO implements MovieDao {
         }
     }
 
-    private Film extractFilm(ResultSet rs) {
-        Film film = new Film();
+    private Movie extractFilm(ResultSet rs) {
+        Movie film = new Movie();
         try {
-            film.setId(rs.getInt("id"));
-            film.setName(rs.getString("name"));
-            film.setDescription(rs.getString("description"));
-            film.setYear(rs.getInt("year"));
-            film.setViewed(rs.getBoolean("viewed"));
+            film.setId(rs.getInt(DBFields.ID));
+            film.setName(rs.getString(DBFields.Movie.NAME));
+            film.setDescription(rs.getString(DBFields.Movie.DESCRIPTION));
+            film.setYear(rs.getInt(DBFields.Movie.YEAR));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return film;
     }
 
-
-    /*private Session session = HibernateUtil.getSessionFactory().openSession();
-
-    @SuppressWarnings("unchecked")
-    public List<Film> getAll() {
-        Criteria criteria = session.createCriteria(Film.class);
-        return criteria.list();
-    }
-
-    public Film get(int id) {
-        return (Film) session.get(Film.class, id);
-    }
-
-    public void delete(int id) {
-        Film movie = get(id);
-        if (movie != null) {
-            session.delete(movie);
-        }
-    }
-
-    public void insert(Film movie) {
-        session.persist(movie);
-    }
-
-    public void update(Film movie) {
-        session.update(movie);
-    }*/
 }

@@ -1,8 +1,8 @@
 package ua.nure.petryasya.service;
 
 import ua.nure.petryasya.dao.MovieDao;
-import ua.nure.petryasya.dao.MovieDaoImpl;
-import ua.nure.petryasya.model.Film;
+import ua.nure.petryasya.dao.jdbcImpl.MovieDaoJDBCImpl;
+import ua.nure.petryasya.model.Movie;
 import ua.nure.petryasya.model.Movies;
 
 import javax.jws.WebService;
@@ -10,7 +10,7 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "ua.nure.petryasya.service.MovieService")
 public class MovieServiceImpl implements MovieService {
 
-    private MovieDao movieDao = new MovieDaoImpl();
+    private MovieDao movieDao = new MovieDaoJDBCImpl();
 
     @Override
     public Movies getMovies() {
@@ -20,18 +20,25 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Film getMovie(int id) {
+    public Movie getMovie(int id) {
         return movieDao.get(id);
     }
 
     @Override
-    public void addMovie(Film movie) {
+    public void addMovie(Movie movie) {
         movieDao.insert(movie);
     }
 
     @Override
     public void deleteMovie(int id) {
         movieDao.delete(id);
+    }
+
+    @Override
+    public Movies getByUser(int idUser) {
+        Movies movies = new Movies();
+        movies.setMovieList(movieDao.getByUser(idUser));
+        return movies;
     }
 
 

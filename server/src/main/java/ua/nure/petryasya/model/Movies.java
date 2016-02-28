@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Movies {
 
-    private List<Film> movieList = new ArrayList<>();
+    private List<Movie> movieList = new ArrayList<>();
 
-    public List<Film> getMovieList() {
+    public List<Movie> getMovieList() {
         return movieList;
     }
 
-    public void setMovieList(List<Film> movieList) {
+    public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
     }
 

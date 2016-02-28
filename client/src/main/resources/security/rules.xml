@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="rules.xsd">
+    <rule>
+        <role>user</role>
+        <urls>
+			<url>/index.html</url>
+            <url>/login</url>
+            <url>/addMovie</url>
+            <url>/deleteMovie</url>
+            <url>/mymovies</url>
+            <url>/logout</url>
+        </urls>
+    </rule>
+
+    <rule>
+        <role>common</role>
+        <urls>
+            <url>/index.html</url>
+            <url>/login</url>
+        </urls>
+    </rule>
+
+
+</security>

@@ -1,6 +1,8 @@
 package ua.nure.petryasya.dao;
 
 import org.apache.log4j.Logger;
+import ua.nure.petryasya.constants.DBFields;
+import ua.nure.petryasya.model.Movie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,4 +41,6 @@ public class DAO {
             }
         }
     }
+
+
 }

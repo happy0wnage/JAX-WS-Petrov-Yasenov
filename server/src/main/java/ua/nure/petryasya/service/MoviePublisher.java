@@ -4,9 +4,14 @@ import javax.xml.ws.Endpoint;
 
 public class MoviePublisher {
 
-	public static void main(String[] args) {
-		Endpoint ep = Endpoint.create(new MovieServiceImpl());
-		ep.publish("http://localhost:9090/movieServer");
-	}
+    public static void main(String[] args) {
+        Endpoint movie = Endpoint.create(new MovieServiceImpl());
+        movie.publish("http://localhost:9090/movieService");
+
+        Endpoint user = Endpoint.create(new UserServiceImpl());
+        user.publish("http://localhost:9090/userService");
+
+
+    }
 
 }
